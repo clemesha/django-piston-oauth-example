@@ -1,0 +1,70 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Getting OAuth Working with django-piston
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+=========
+Resources
+=========
+
+    http://blog.carduner.net/2010/01/26/django-piston-and-oauth/
+    http://railstips.org/blog/archives/2009/03/29/oauth-explained-and-what-it-is-good-for/
+    "Obtaining a token, Use the token":http://api.bitbucket.org/1.0/doc/auth/
+    http://github.com/simplegeo/python-oauth2
+    "Where to access the OAuth Consumer key and Consumer secret":http://twitter.com/apps
+    "How to access Twitter User data (profile image, etc)":https://twitter.com/account/verify_credentials.json
+    "OAuth client + Django example (is README)":http://github.com/simplegeo/python-oauth2
+    http://mojodna.net/2009/05/20/an-idiots-guide-to-oauth-10a.html
+    http://wiki.oauth.net/Signed-Callback-URLs
+    http://netsmith.blogspot.com/2010/02/how-i-built-feedertweeter-in-less-than.html
+    http://code.google.com/p/oauth-python-twitter/source/browse/trunk/oauthtwitter.py
+    "Twisted http://github.com/mojodna/oauth-proxy":http://github.com/mojodna/oauth-proxy
+    http://mojodna.net/2009/08/21/exploring-oauth-protected-apis.html
+    http://parse.ly/api/oauth.html
+
+
+
+====
+Code
+====
+
+    "You are unauthenticated. (API protected by OAuth)." In browser:
+    http://localhost:8000/api/posts.json
+
+    Add/Auth new creds/token "by hand as admin":
+    http://localhost:8000/admin/piston/token/ #IMPORTANT "token type"=access, "is approved":checked, User:correct one
+
+    Authorizing Token (logged in as Admin):
+    http://localhost:8000/api/oauth/authorize/?oauth_token=3Szw3AU5bkMV6QTVnR
+
+
+
+File changed for Django Piston Oauth "blogserver" Example
+---------------------------------------------------------
+blogserver/piston/templates/oauth/challenge.html
+blogserver/piston/templates/oauth/authorize_token.html
+blogserver/piston/templates/api/mails/consumer_accepted.txt
+
+blogserver/settings.py
+oauth_client.py 
+python-oauth2/oauth2/__init__.py
+
+
+Running Client
+--------------
+    $ curl http://localhost:8000/api/posts.json -F "title=test" # No OAuth, returns "unauthorized"
+    # make sure "oauth_client.py" has correct hostname
+    $ python oauth_client.py #create new token/secret, put "oauth_token" link in browser, "what is PIN? aka 'oauth_verifier'"
+
+    #using OAuth Twisted proxy as described in next section
+    $ curl -x localhost:8001 http://localhost:8000/api/posts.json" -F "title=test" -F "content=blah"
+
+OAuth Twisted Proxy (conveniently wrap each call with OAuth creds)
+----------------------------------------------------------------
+    pip -E piston_env/ install twisted
+    cd piston_env/
+    git clone git://github.com/mojodna/oauth-proxy.git
+    source bin/activate
+    cd oauth-proxy
+    twistd -n oauth_proxy --consumer-key testkey --consumer-secret testsecret --token $TOKEN --token-secret $SECRET
+
