@@ -73,7 +73,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'blogserver.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
@@ -88,8 +88,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.markup',
     'piston',
-    'blogserver.blog',
-    'blogserver.api',
+    'blog',
+    'api',
 )
 
 FIXTURE_DIRS = (

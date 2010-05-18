@@ -1,7 +1,7 @@
 from piston.handler import BaseHandler, AnonymousBaseHandler
 from piston.utils import rc, require_mime, require_extended
 
-from blogserver.blog.models import Blogpost
+from blog.models import Blogpost
 
 class BlogpostHandler(BaseHandler):
     """

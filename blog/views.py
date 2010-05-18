@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from blogserver.blog.models import Blogpost
+from blog.models import Blogpost
 
 def posts(request):
     posts = Blogpost.objects.all()

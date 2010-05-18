@@ -1,14 +1,16 @@
+import os
 import cgi
 import oauth2 as oauth
 
 # settings for the local test consumer
-SERVER = 'localhost'
-PORT = 8000
+CONSUMER_SERVER = os.environ.get("CONSUMER_SERVER") or 'localhost'
+CONSUMER_PORT = os.environ.get("CONSUMER_PORT") or '8000'
+print CONSUMER_SERVER , CONSUMER_PORT 
 
 # fake urls for the test server (matches ones in server.py)
-REQUEST_TOKEN_URL = 'http://%s:%s/api/oauth/request_token/' % (SERVER, PORT)
-ACCESS_TOKEN_URL = 'http://%s:%s/api/oauth/access_token/' % (SERVER, PORT)
-AUTHORIZE_URL = 'http://%s:%s/api/oauth/authorize/' % (SERVER, PORT)
+REQUEST_TOKEN_URL = 'http://%s:%s/api/oauth/request_token/' % (CONSUMER_SERVER, CONSUMER_PORT)
+ACCESS_TOKEN_URL = 'http://%s:%s/api/oauth/access_token/' % (CONSUMER_SERVER, CONSUMER_PORT)
+AUTHORIZE_URL = 'http://%s:%s/api/oauth/authorize/' % (CONSUMER_SERVER, CONSUMER_PORT)
 
 # key and secret granted by the service provider for this consumer application - same as the MockOAuthDataStore
 CONSUMER_KEY = 'testkey'

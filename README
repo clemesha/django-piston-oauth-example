@@ -41,11 +41,11 @@ Code
 
 File changed for Django Piston Oauth "blogserver" Example
 ---------------------------------------------------------
-blogserver/piston/templates/oauth/challenge.html
-blogserver/piston/templates/oauth/authorize_token.html
-blogserver/piston/templates/api/mails/consumer_accepted.txt
+piston/templates/oauth/challenge.html
+piston/templates/oauth/authorize_token.html
+piston/templates/api/mails/consumer_accepted.txt
 
-blogserver/settings.py
+settings.py
 oauth_client.py 
 python-oauth2/oauth2/__init__.py
 

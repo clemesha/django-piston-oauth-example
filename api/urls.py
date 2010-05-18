@@ -3,7 +3,7 @@ from piston.resource import Resource
 from piston.authentication import HttpBasicAuthentication, OAuthAuthentication
 from piston.doc import documentation_view
 
-from blogserver.api.handlers import BlogpostHandler
+from api.handlers import BlogpostHandler
 
 #auth = HttpBasicAuthentication(realm='My sample API')
 auth = OAuthAuthentication(realm="Test Realm")
